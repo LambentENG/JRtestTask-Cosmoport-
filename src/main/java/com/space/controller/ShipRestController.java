@@ -27,28 +27,28 @@ public class ShipRestController {
     @GetMapping("/ships")
     @ResponseStatus(HttpStatus.OK)
     public List<Ship> getAllExistingShipsList(
-                                  @RequestParam(value = "name", required = false) String name,
-                                  @RequestParam(value = "planet", required = false) String planet,
-                                  @RequestParam(value = "shipType", required = false) ShipType shipType,
-                                  @RequestParam(value = "after", required = false) Long after,
-                                  @RequestParam(value = "before", required = false) Long before,
-                                  @RequestParam(value = "isUsed", required = false) Boolean isUsed,
-                                  @RequestParam(value = "minSpeed", required = false) Double minSpeed,
-                                  @RequestParam(value = "maxSpeed", required = false) Double maxSpeed,
-                                  @RequestParam(value = "minCrewSize", required = false) Integer minCrewSize,
-                                  @RequestParam(value = "maxCrewSize", required = false) Integer maxCrewSize,
-                                  @RequestParam(value = "minRating", required = false) Double minRating,
-                                  @RequestParam(value = "maxRating", required = false) Double maxRating,
-                                  @RequestParam(value = "order", required = false, defaultValue = "ID") ShipOrder order,
-                                  @RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
-                                  @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "planet", required = false) String planet,
+            @RequestParam(value = "shipType", required = false) ShipType shipType,
+            @RequestParam(value = "after", required = false) Long after,
+            @RequestParam(value = "before", required = false) Long before,
+            @RequestParam(value = "isUsed", required = false) Boolean isUsed,
+            @RequestParam(value = "minSpeed", required = false) Double minSpeed,
+            @RequestParam(value = "maxSpeed", required = false) Double maxSpeed,
+            @RequestParam(value = "minCrewSize", required = false) Integer minCrewSize,
+            @RequestParam(value = "maxCrewSize", required = false) Integer maxCrewSize,
+            @RequestParam(value = "minRating", required = false) Double minRating,
+            @RequestParam(value = "maxRating", required = false) Double maxRating,
+            @RequestParam(value = "order", required = false, defaultValue = "ID") ShipOrder order,
+            @RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "3") Integer pageSize) {
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(order.getFieldName()));
 
         return service.getAllExistingShipsList(
                 Specification.where(
-                             service.nameFilter(name)
-                        .and(service.planetFilter(planet)))
+                        service.nameFilter(name)
+                                .and(service.planetFilter(planet)))
                         .and(service.shipTypeFilter(shipType))
                         .and(service.dateFilter(after, before))
                         .and(service.usageFilter(isUsed))
@@ -75,8 +75,8 @@ public class ShipRestController {
 
         return service.getAllExistingShipsList(
                 Specification.where(
-                             service.nameFilter(name)
-                        .and(service.planetFilter(planet)))
+                        service.nameFilter(name)
+                                .and(service.planetFilter(planet)))
                         .and(service.shipTypeFilter(shipType))
                         .and(service.dateFilter(after, before))
                         .and(service.usageFilter(isUsed))
@@ -94,14 +94,14 @@ public class ShipRestController {
     @GetMapping("/ships/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Ship getShip(@PathVariable("id") String id) {
-        Long iD = service.checkAndParseId(id);
+        Long iD = service.idChecker(id);
         return service.getShip(iD);
     }
 
     @PostMapping("/ships/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Ship editShip(@PathVariable("id") String id, @RequestBody Ship ship) {
-        Long iD = service.checkAndParseId(id);
+        Long iD = service.idChecker(id);
         return service.editShip(iD, ship);
     }
 
@@ -109,7 +109,7 @@ public class ShipRestController {
     @ResponseStatus(HttpStatus.OK)
 
     public void deleteShip(@PathVariable("id") String id) {
-        Long iD = service.checkAndParseId(id);
+        Long iD = service.idChecker(id);
         service.deleteByID(iD);
     }
 }
