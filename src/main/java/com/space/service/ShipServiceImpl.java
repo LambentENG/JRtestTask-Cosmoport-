@@ -37,11 +37,11 @@ public class ShipServiceImpl implements ShipService {
             throw new BadRequestException("The planet name is too long or absent");
         }
 
-        if (shipRequired.getSpeed() != null && (shipRequired.getSpeed() < 0.1D || shipRequired.getSpeed() > 9999.9D)) {
+        if (shipRequired.getSpeed() != null && (shipRequired.getSpeed() < 0.01D || shipRequired.getSpeed() > 9999.99D)) {
             throw new BadRequestException("The ship speed is out of range");
         }
 
-        if (shipRequired.getCrewSize() != null && (shipRequired.getCrewSize() < 10 || shipRequired.getCrewSize() > 5000)) {
+        if (shipRequired.getCrewSize() != null && (shipRequired.getCrewSize() < 1 || shipRequired.getCrewSize() > 9999)) {
             throw new BadRequestException("The crew size is out of range");
         }
 
