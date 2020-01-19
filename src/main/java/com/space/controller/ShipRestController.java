@@ -48,7 +48,7 @@ public class ShipRestController {
         return service.getAllExistingShipsList(
                 Specification.where(
                         service.nameFilter(name)
-                                .and(service.planetFilter(planet)))
+                        .and(service.planetFilter(planet)))
                         .and(service.shipTypeFilter(shipType))
                         .and(service.dateFilter(after, before))
                         .and(service.usageFilter(isUsed))
@@ -76,7 +76,7 @@ public class ShipRestController {
         return service.getAllExistingShipsList(
                 Specification.where(
                         service.nameFilter(name)
-                                .and(service.planetFilter(planet)))
+                        .and(service.planetFilter(planet)))
                         .and(service.shipTypeFilter(shipType))
                         .and(service.dateFilter(after, before))
                         .and(service.usageFilter(isUsed))
