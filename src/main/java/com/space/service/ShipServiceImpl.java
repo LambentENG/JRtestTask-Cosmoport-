@@ -192,6 +192,7 @@ public class ShipServiceImpl implements ShipService {
                 Date after1 = new Date(after);
                 return criteriaBuilder.greaterThanOrEqualTo(root.get("prodDate"), after1);
             }
+            //time difference
             Date before1 = new Date(before - 3600001);
             Date after1 = new Date(after);
             return criteriaBuilder.between(root.get("prodDate"), after1, before1);
